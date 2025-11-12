@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: radial-gradient(circle at top, #ffe4ec, #ffb3d1, #ff7fb0, #ff5c96);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: bgPulse 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes bgPulse {
+            0% { background: radial-gradient(circle at top, #ffe4ec, #ffb3d1, #ff7fb0, #ff5c96);} 
+            100% { background: radial-gradient(circle at bottom, #ffd8f0, #ffa9dc, #ff90c7, #ff70ae);} 
+        }
+
+        .card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            width: 75%;
+            max-width: 650px;
+            padding: 40px 50px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            text-align: center;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid #ff6f91;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #ff3f6f;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(255, 0, 98, 0.3);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% {text-shadow: 0 0 10px rgba(255, 0, 150, 0.6);} 
+            50% {text-shadow: 0 0 20px rgba(255, 0, 150, 0.9);} 
+            100% {text-shadow: 0 0 10px rgba(255, 0, 150, 0.6);} 
+        }
+
+        p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #ff6f91;
+            color: white;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff3f6f;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50% 50% 45% 50%;
+            animation: floatBalloon 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+
+        .balloon:nth-child(1) { left: 10%; top: 10%; background: #ff6f91; animation-delay: 0.5s; }
+        .balloon:nth-child(2) { left: 80%; top: 20%; background: #ff9a9e; animation-delay: 1s; }
+        .balloon:nth-child(3) { left: 20%; top: 60%; background: #fad0c4; animation-delay: 1.5s; }
+        .balloon:nth-child(4) { left: 70%; top: 70%; background: #fbc2eb; animation-delay: 2s; }
+    </style>
+</head>
+<body>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="card">
+        <h1>🎂 Happy Birthday! 🎂</h1>
+        <p>Tap tombol di bawah untuk membuka kejutan 🎁</p>
+        <button class="btn" onclick="showMessage()">Buka Kejutan!</button>
+        <div id="surprise" style="display:none; margin-top:20px; font-size:22px; color:#ff3f6f;">Semoga harimu senin terus💖✨</div>
+    </div>
+    <script>
+        function showMessage(){
+            document.getElementById('surprise').style.display = 'block';
+        }
+    function showMessage(){
+            document.getElementById('surprise').style.display = 'block';
+            launchConfetti();
+        }
+
+        function launchConfetti(){
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'fixed';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            document.body.appendChild(confettiContainer);
+
+            for(let i=0;i<100;i++){
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = '10px';
+                confetti.style.height = '20px';
+                confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+                confetti.style.left = Math.random()*100 + '%';
+                confetti.style.top = '-20px';
+                confetti.style.opacity = '0.9';
+                confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+                confetti.style.transition = 'transform 3s linear, top 3s ease-out';
+
+                confettiContainer.appendChild(confetti);
+
+                setTimeout(()=>{
+                    confetti.style.top = '110%';
+                    confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+                },100);
+            }
+
+            setTimeout(()=>{
+                confettiContainer.remove();
+            },3200);
+        }
+    </script>
+</body>
+</html>
